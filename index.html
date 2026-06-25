@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BabyCare Hub</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.ico"></head>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<script type="module" src="script.js"></script>
+<body class="light">
+
+<!-- ===================== SPLASH ===================== -->
+<div id="screen-splash" class="screen active">
+  <div class="splash-wave splash-wave--top"></div>
+  <div class="splash-center">
+    <img src="./assets/logo-babycare.png" id="splashLogo" class="splash-logo" alt="BabyCare Hub" />
+    <h1 class="splash-title">BabyCare Hub</h1>
+  </div>
+  <div class="splash-wave splash-wave--bottom"></div>
+</div>
+
+<!-- ===================== LOGIN ===================== -->
+<div id="screen-login" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="loginLogo" class="topbar-logo" alt="logo" />
+    <span class="topbar-title">BabyCare Hub</span>
+  </header>
+  <div class="auth-page">
+    <div class="auth-card fade-in">
+      <h2 class="auth-card__title">Acesse sua conta</h2>
+      <input id="loginEmail" class="auth-input" type="text" placeholder="Email/Telefone..." />
+      <div class="auth-input-wrap">
+        <input id="loginPass" class="auth-input" type="password" placeholder="Senha" />
+        <button class="eye-btn" data-target="loginPass">&#128065;</button>
+      </div>
+      <div class="auth-link-row">
+        <a class="auth-link" data-goto="screen-recover">Esqueceu a senha?</a>
+      </div>
+      <button class="btn-primary" id="btnLogin">Entrar</button>
+      <div class="auth-divider"><span>ou</span></div>
+      <button id="btnGoogleLogin" class="btn-google">
+        <svg width="18" height="18" viewBox="0 0 24 24">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        Entrar com Google
+      </button>
+      <p class="auth-footer">Não tem conta? <a class="auth-link" data-goto="screen-cadastro">Cadastre-se</a></p>
+      <p class="auth-footer"><a class="auth-link auth-link--help" data-goto="screen-email-publico">&#10067; Precisa de ajuda?</a></p>
+    </div>
+  </div>
+  <div class="theme-toggle" id="ttLogin"><img id="tiLogin" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== CADASTRO ===================== -->
+<div id="screen-cadastro" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="cadLogo" class="topbar-logo" alt="logo" />
+    <span class="topbar-title">BabyCare Hub</span>
+  </header>
+  <button class="back-btn" data-goto="screen-login">&#8592; Voltar ao login</button>
+  <div class="auth-page auth-page--padded">
+    <div class="auth-card fade-in">
+      <h2 class="auth-card__title">Cadastro</h2>
+      <input id="cadNome" class="auth-input" type="text" placeholder="Seu nome completo" />
+      <input id="cadEmail" class="auth-input" type="email" placeholder="Email" />
+      <input id="cadPhone" class="auth-input" type="tel"   placeholder="Telefone" />
+      <div class="auth-input-wrap">
+        <input id="cadPass1" class="auth-input" type="password" placeholder="Senha" />
+        <button class="eye-btn" data-target="cadPass1">&#128065;</button>
+      </div>
+      <div class="auth-input-wrap">
+        <input id="cadPass2" class="auth-input" type="password" placeholder="Confirmar senha" />
+        <button class="eye-btn" data-target="cadPass2">&#128065;</button>
+      </div>
+      <button class="btn-primary" id="btnCadastro">Criar conta</button>
+    </div>
+  </div>
+  <div class="theme-toggle" id="ttCad"><img id="tiCad" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== RECUPERAR SENHA ===================== -->
+<div id="screen-recover" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="recoverLogo" class="topbar-logo" alt="logo" />
+    <span class="topbar-title">BabyCare Hub</span>
+  </header>
+  <button class="back-btn" data-goto="screen-login">&#8592; Voltar ao login</button>
+  <div class="auth-page auth-page--padded">
+    <div class="auth-card fade-in">
+      <h2 class="auth-card__title">Recuperação de conta</h2>
+      <p class="auth-card__sub">Insira seu e-mail e enviaremos um código de verificação.</p>
+      <input class="auth-input" type="text" placeholder="Email..." />
+      <div class="recover-info-box">Você receberá um código por e-mail para redefinir sua senha.</div>
+      <button class="btn-primary" id="btnRecover">Enviar código</button>
+    </div>
+  </div>
+  <div class="theme-toggle" id="ttRecover"><img id="tiRecover" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== ONBOARDING ===================== -->
+<div id="screen-onboard" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="onboardLogo" class="topbar-logo-sm" alt="logo" />
+    <span class="topbar-title">BabyCare Hub</span>
+    <button class="topbar-btn topbar-btn--sair" data-sair="true">Sair</button>
+  </header>
+  <div class="onboard-page">
+    <h2 class="onboard-title">Para prosseguir preencha suas informações pessoais</h2>
+    <p class="onboard-legend"><span class="required">*</span> Campos obrigatórios</p>
+    <div class="onboard-grid">
+      <!-- BLOCO OBRIGATÓRIOS -->
+      <div class="onboard-card onboard-card--required">
+        <p class="onboard-card-section-label">Informações essenciais <span class="required">*</span></p>
+        <div class="onboard-field"><label>Idade <span class="required">*</span></label><input class="onboard-input" type="number" placeholder="Digite..." id="oIdade"/></div>
+        <div class="onboard-field"><label>Altura (m) <span class="required">*</span></label><input class="onboard-input" type="text" placeholder="Digite..." id="oAltura"/></div>
+        <div class="onboard-field"><label>Peso (kg) <span class="required">*</span></label><input class="onboard-input" type="text" placeholder="Digite..." id="oPeso"/></div>
+        <div class="onboard-field"><label>Tempo de Gestação (sem) <span class="required">*</span></label><input class="onboard-input" type="number" min="1" max="40" placeholder="Digite..." id="oSemanas"/></div>
+        <div class="onboard-field"><label>Data Última Menstruação <span class="required">*</span></label><input class="onboard-input" type="date" id="oDum" max=""/></div>
+      </div>
+      <!-- BLOCO OPCIONAL 1 -->
+      <div class="onboard-card">
+        <p class="onboard-card-section-label">Saúde &amp; hábitos</p>
+        <div class="onboard-field"><label>Tipo Sanguíneo</label><input class="onboard-input" type="text" placeholder="Digite..." id="oTipoSang"/></div>
+        <div class="onboard-field"><label>Uso de Medicamentos</label><input class="onboard-input" type="text" placeholder="Digite..." id="oMeds"/></div>
+        <div class="onboard-field"><label>Pratica Ativ. Física? (s/n)</label><input class="onboard-input" type="text" placeholder="Digite..." id="oAtiv"/></div>
+        <div class="onboard-field"><label>Uso de Álcool/Cigarro</label><input class="onboard-input" type="text" placeholder="Digite..." id="oAlcool"/></div>
+        <div class="onboard-field"><label>Sintomas Recentes</label><input class="onboard-input" type="text" placeholder="Digite..." id="oSintomas"/></div>
+      </div>
+      <!-- BLOCO OPCIONAL 2 -->
+      <div class="onboard-card">
+        <p class="onboard-card-section-label">Histórico &amp; gestação</p>
+        <div class="onboard-field"><label>Tipo de Gestação</label><input class="onboard-input" type="text" placeholder="Digite..." id="oTipoGest"/></div>
+        <div class="onboard-field"><label>Gravidez Anterior (s/n)</label><input class="onboard-input" type="text" placeholder="Digite..." id="oGravAnterior"/></div>
+        <div class="onboard-field"><label>Doenças Pré-Existentes</label><input class="onboard-input" type="text" placeholder="Digite..." id="oDoencas"/></div>
+        <div class="onboard-field"><label>Alergias</label><input class="onboard-input" type="text" placeholder="Digite..." id="oAlergias"/></div>
+        <div class="onboard-field"><label>Médico obstetra resp.</label><input class="onboard-input" type="text" placeholder="Digite..." id="oMedico"/></div>
+      </div>
+    </div>
+    <button class="btn-save" id="btnSaveOnboard">Salvar</button>
+  </div>
+  <div class="theme-toggle" id="ttOnboard"><img id="tiOnboard" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== HOME ===================== -->
+<div id="screen-home" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="homeLogo" class="topbar-logo-sm" alt="logo" />
+    <span class="topbar-title">BabyCare Hub</span>
+    <nav class="topbar-nav">
+      <button class="topbar-btn" data-goto="screen-chat">Fale com a IA</button>
+      <button class="topbar-btn" data-goto="screen-ajuda">Ajuda</button>
+      <button class="topbar-avatar" data-goto="screen-perfil"><img src="./assets/logo-circulo.png" id="homeAvatar" class="topbar-avatar-img" alt="perfil"/></button>
+      <button class="topbar-btn topbar-btn--sair" data-sair="true">Sair</button>
+    </nav>
+  </header>
+  <div class="subnav">
+    <span class="subnav__item subnav__item--active">Início</span>
+  </div>
+  <main class="home-main fade-in">
+    <div class="home-header">
+      <img id="homeDecoL" class="home-deco" alt=""/>
+      <h2 class="home-title">Minha Gestação</h2>
+      <img id="homeDecoR" class="home-deco" alt=""/>
+    </div>
+    <p class="home-week-line">Você está na: <strong id="homeWeekDisplay"> Semana</strong></p>
+    <p class="home-week-line">Previsão de Parto: <strong id="homePartoPrev"> Semana de </strong></p>
+    <div class="home-cards">
+      <div class="home-card" data-goto="screen-bebe">
+        <h3 class="home-card__title">Seu Bebê</h3>
+        <p class="home-card__sub"><strong>Tamanho:</strong><br><span id="homeFetoComparacao">Aproximadamente como um(a) .</span></p>
+        <p class="home-card__measure" id="homeFetoMedida"> a  cm</p>
+        <div class="home-card__imgs">
+          <img src="./assets/feto-inicio.png" id="homeFeto" class="home-card__img" alt="feto"/>
+          <img src="" id="homeFrutaImg" class="home-card__img" alt="alimento"/>
+        </div>
+      </div>
+      <div class="home-card" data-goto="screen-corpo">
+        <h3 class="home-card__title">Seu Corpo</h3>
+        <p class="home-card__sub">Cansaço e dores nas costas?<br>É normal, fique tranquila!</p>
+        <img src="./assets/gravida-home.png" id="homeGestante" class="home-card__img home-card__img--large" alt="gestante"/>
+      </div>
+      <div class="home-card" data-goto="screen-alimentacao">
+        <h3 class="home-card__title">Alimentação</h3>
+        <p class="home-card__sub">Nutrição para a mamãe e o bebê.</p>
+        <img src="./assets/fruta-home.png" id="homeFrutas" class="home-card__img home-card__img--large" alt="frutas"/>
+      </div>
+      <div class="home-card" data-goto="screen-exercicios">
+        <h3 class="home-card__title">Exercícios</h3>
+        <p class="home-card__sub">Alongamento e atividades seguras.</p>
+        <img src="./assets/pilates-home.png" id="homeEx" class="home-card__img home-card__img--large" alt="exercício"/>
+      </div>
+    </div>
+  </main>
+  <div class="theme-toggle" id="ttHome"><img id="tiHome" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== SEU BEBÊ ===================== -->
+<div id="screen-bebe" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="bebeLogo" class="topbar-logo-sm" alt="logo"/>
+    <span class="topbar-title" data-goto="screen-home" style="cursor: pointer;">BabyCare Hub</span>
+    <nav class="topbar-nav">
+      <button class="topbar-btn" data-goto="screen-chat">Fale com a IA</button>
+      <button class="topbar-avatar" data-goto="screen-perfil"><img src="./assets/logo-circulo.png" id="bebeAvatar" class="topbar-avatar-img" alt="perfil"/></button>
+      <button class="topbar-btn topbar-btn--sair" data-sair="true">Sair</button>
+    </nav>
+  </header>
+  <div class="subnav">
+    <span class="subnav__item" data-goto="screen-home">Início</span><span class="subnav__sep">|</span>
+    <span class="subnav__item" data-goto="screen-perfil">Perfil</span><span class="subnav__sep">|</span>
+    <span class="subnav__item" data-goto="screen-ajuda">Ajuda</span>
+  </div>
+  <main class="page-main fade-in">
+    <div class="page-header">
+      <img id="bebeDecoL" class="page-deco" alt=""/><h2 class="page-title">Seu Bebê</h2><img id="bebeDecoR" class="page-deco" alt=""/>
+    </div>
+    <p class="page-week-label" id="bebeWeekLabel">Semana </p>
+    <p class="page-subtitle">Acompanhe o crescimento do seu bebê nessa semana</p>
+    <div class="bebe-layout">
+      <div class="bebe-col bebe-col--left">
+        <p class="bebe-stat">&#8226; <strong>Peso:</strong> <span id="bebePeso">~600g</span></p>
+        <p class="bebe-stat">&#8226; <strong>Altura:</strong> <span id="bebeAltura">~30cm</span></p>
+      </div>
+      <div class="bebe-col bebe-col--center">
+        <img src="./assets/feto-inicio.png" id="bebeFeto" class="bebe-feto-img" alt="feto"/>
+        <img id="bebeFruta" class="bebe-feto-img" alt="comparação de tamanho" style="margin-top:8px;max-height:80px;object-fit:contain;"/>
+      </div>
+      <div class="bebe-col bebe-col--right">
+        <p class="bebe-tip" id="bebeTip1">&#8226; Vitaminas são importantes!</p>
+        <p class="bebe-tip" id="bebeTip2">&#8226; Ele já reconhece sua voz!</p>
+      </div>
+    </div>
+    <p class="bebe-bottom-tip" id="bebeBottomTip">&#8226; Seu bebê já escuta sons</p>
+    <div class="journey-bar">
+      <div class="journey-bar__header">
+        <div><span class="journey-bar__label">Sua jornada</span><p class="journey-bar__week" id="bebeJornada">Semana 18 de 40</p></div>
+        <span class="journey-bar__pct" id="bebePct">45% concluído</span>
+      </div>
+      <div class="journey-bar__track"><div class="journey-bar__fill" id="bebeFill" style="width:45%"></div></div>
+      <div class="journey-bar__labels"><span>1º trimestre</span><span>2º trimestre</span><span>3º trimestre</span></div>
+    </div>
+  </main>
+  <div class="theme-toggle" id="ttBebe"><img id="tiBebe" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== SEU CORPO ===================== -->
+<div id="screen-corpo" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="corpoLogo" class="topbar-logo-sm" alt="logo"/>
+    <span class="topbar-title" data-goto="screen-home" style="cursor: pointer;">BabyCare Hub</span>
+    <nav class="topbar-nav">
+      <button class="topbar-btn" data-goto="screen-chat">Fale com a IA</button>
+      <button class="topbar-avatar" data-goto="screen-perfil"><img src="./assets/logo-circulo.png" id="corpoAvatar" class="topbar-avatar-img" alt="perfil"/></button>
+      <button class="topbar-btn topbar-btn--sair" data-sair="true">Sair</button>
+    </nav>
+  </header>
+  <div class="subnav">
+    <span class="subnav__item" data-goto="screen-home">Início</span><span class="subnav__sep">|</span>
+    <span class="subnav__item" data-goto="screen-perfil">Perfil</span><span class="subnav__sep">|</span>
+    <span class="subnav__item" data-goto="screen-ajuda">Ajuda</span>
+  </div>
+  <main class="page-main fade-in">
+    <div class="page-header">
+      <img id="corpoDecoL" class="page-deco" alt=""/><h2 class="page-title">Seu Corpo</h2><img id="corpoDecoR" class="page-deco" alt=""/>
+    </div>
+    <p class="page-subtitle page-subtitle--bold">Hábitos e atenções essenciais para uma gestação saudável</p>
+    <div class="three-col">
+      <div class="info-card">
+        <div class="info-card__header"><h3>Recomendações</h3></div>
+        <div class="info-card__body">
+          <div class="info-item"><strong>Pré-natal regular</strong><span>Consultas conforme orientação médica</span></div>
+          <div class="info-item"><strong>Suplementação</strong><span>Ácido fólico, ferro e vitamina D</span></div>
+          <div class="info-item"><strong>Alimentação equilibrada</strong><span>Frutas, proteínas magras e integrais</span></div>
+          <div class="info-item"><strong>Hidratação abundante</strong><span>Mínimo 2 litros de água por dia</span></div>
+          <div class="info-item"><strong>Sono de qualidade</strong><span>Deite de lado, prefira o esquerdo</span></div>
+          <div class="info-item"><strong>Vacinas em dia</strong><span>Influenza, dTpa e hepatite B</span></div>
+          <div class="info-item"><strong>Saúde emocional</strong><span>Apoio psicológico e rede de suporte</span></div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__header"><h3>O que evitar</h3></div>
+        <div class="info-card__body">
+          <div class="info-item"><strong>Tabaco e álcool</strong><span>Nenhuma quantidade é segura</span></div>
+          <div class="info-item"><strong>Automedicação</strong><span>Nem chás sem orientação médica</span></div>
+          <div class="info-item"><strong>Alimentos de risco</strong><span>Crus, embutidos e queijos mofados</span></div>
+          <div class="info-item"><strong>Excesso de cafeína</strong><span>Limite: 200 mg/dia (~1 café)</span></div>
+          <div class="info-item"><strong>Produtos químicos</strong><span>Tintas, solventes e pesticidas</span></div>
+          <div class="info-item"><strong>Estresse prolongado</strong><span>Afeta o desenvolvimento fetal</span></div>
+          <div class="info-item"><strong>Esforço físico excessivo</strong><span>Peso alto e risco de queda</span></div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__header"><h3>Dicas do dia a dia</h3></div>
+        <div class="info-card__body">
+          <div class="info-item"><strong>Roupas confortáveis</strong><span>Evite saltos — risco de quedas</span></div>
+          <div class="info-item"><strong>Movimentos lentos</strong><span>Ao sentar e levantar, use apoio</span></div>
+          <div class="info-item"><strong>Hidratante diário</strong><span>Barriga, seios e quadris</span></div>
+          <div class="info-item"><strong>Respiração consciente</strong><span>Reduz ansiedade e prepara o parto</span></div>
+          <div class="info-item"><strong>Anote os sintomas</strong><span>Relate ao médico na consulta</span></div>
+          <div class="info-item"><strong>Travesseiro de apoio</strong><span>Entre as pernas ao dormir</span></div>
+          <div class="info-item"><strong>Rede de apoio</strong><span>Divida as demandas com quem ama</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="notes-row">
+      <div class="note-item"><span class="note-num">1</span>Consulte o obstetra antes de iniciar qualquer novo hábito ou rotina.</div>
+      <div class="note-item"><span class="note-num">2</span>Sinais de alerta: sangramento, dor forte ou ausência de movimentos — procure atendimento.</div>
+      <div class="note-item"><span class="note-num">3</span>Cada trimestre pede cuidados específicos. Acompanhe as atualizações semanais no app.</div>
+      <div class="note-item"><span class="note-num">4</span>Saúde mental importa tanto quanto a física. Não hesite em pedir ajuda profissional.</div>
+    </div>
+  </main>
+  <div class="theme-toggle" id="ttCorpo"><img id="tiCorpo" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== ALIMENTAÇÃO ===================== -->
+<div id="screen-alimentacao" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="alimentacaoLogo" class="topbar-logo-sm" alt="logo"/>
+    <span class="topbar-title" data-goto="screen-home" style="cursor: pointer;">BabyCare Hub</span>
+    <nav class="topbar-nav">
+      <button class="topbar-btn" data-goto="screen-chat">Fale com a IA</button>
+      <button class="topbar-avatar" data-goto="screen-perfil"><img src="./assets/logo-circulo.png" id="alimentacaoAvatar" class="topbar-avatar-img" alt="perfil"/></button>
+      <button class="topbar-btn topbar-btn--sair" data-sair="true">Sair</button>
+    </nav>
+  </header>
+  <div class="subnav">
+    <span class="subnav__item" data-goto="screen-home">Início</span><span class="subnav__sep">|</span>
+    <span class="subnav__item" data-goto="screen-perfil">Perfil</span><span class="subnav__sep">|</span>
+    <span class="subnav__item" data-goto="screen-ajuda">Ajuda</span>
+  </div>
+  <main class="page-main fade-in">
+    <div class="page-header">
+      <img id="alimentacaoDecoL" class="page-deco" alt=""/><h2 class="page-title">Alimentação</h2><img id="alimentacaoDecoR" class="page-deco" alt=""/>
+    </div>
+    <p class="page-subtitle page-subtitle--bold">Uma nutrição adequada é essencial para a saúde da mãe e o desenvolvimento do bebê</p>
+    <div class="three-col">
+      <div class="info-card">
+        <div class="info-card__header"><h3>Alimentos recomendados</h3></div>
+        <div class="info-card__body">
+          <div class="info-item"><strong>Folhas verde-escuras</strong><span>Espinafre, couve — ricos em ácido fólico</span></div>
+          <div class="info-item"><strong>Proteínas magras</strong><span>Frango, peixe, ovos e leguminosas</span></div>
+          <div class="info-item"><strong>Laticínios integrais</strong><span>Cálcio para os ossos do bebê</span></div>
+          <div class="info-item"><strong>Frutas variadas</strong><span>Vitaminas, fibras e antioxidantes</span></div>
+          <div class="info-item"><strong>Grãos integrais</strong><span>Aveia, arroz integral e quinoa</span></div>
+          <div class="info-item"><strong>Castanhas e sementes</strong><span>Gorduras boas e ômega-3</span></div>
+          <div class="info-item"><strong>Água e sucos naturais</strong><span>Mínimo 2 litros de líquidos por dia</span></div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__header"><h3>O que evitar</h3></div>
+        <div class="info-card__body">
+          <div class="info-item"><strong>Carnes e ovos crus</strong><span>Risco de toxoplasmose e salmonela</span></div>
+          <div class="info-item"><strong>Peixes com mercúrio</strong><span>Atum, cação e peixe-espada</span></div>
+          <div class="info-item"><strong>Queijos mofados</strong><span>Brie, gorgonzola — risco de listeria</span></div>
+          <div class="info-item"><strong>Embutidos crus</strong><span>Salame, presunto cru e similares</span></div>
+          <div class="info-item"><strong>Excesso de cafeína</strong><span>Limite de 200 mg/dia (~1 café)</span></div>
+          <div class="info-item"><strong>Bebidas alcoólicas</strong><span>Nenhuma quantidade é segura</span></div>
+          <div class="info-item"><strong>Ultraprocessados</strong><span>Ricos em sódio, açúcar e aditivos</span></div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__header"><h3>Dicas práticas</h3></div>
+        <div class="info-card__body">
+          <div class="info-item"><strong>Fracione as refeições</strong><span>6 refeições menores ao dia</span></div>
+          <div class="info-item"><strong>Café da manhã sempre</strong><span>Evita enjoos e hipoglicemia</span></div>
+          <div class="info-item"><strong>Gengibre para enjoos</strong><span>Chá leve ou biscoito de gengibre</span></div>
+          <div class="info-item"><strong>Suplemento conforme prescrição <em class="tag-obrig">obrigatório</em></strong><span>Não substitui alimentação variada</span></div>
+          <div class="info-item"><strong>Atenção ao ganho de peso</strong><span>Acompanhe com nutricionista</span></div>
+          <div class="info-item"><strong>Evite comer deitada</strong><span>Reduz refluxo e azia</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="notes-row">
+      <div class="note-item"><span class="note-num">1</span>Consulte uma nutricionista para um plano alimentar personalizado por trimestre.</div>
+      <div class="note-item"><span class="note-num">2</span>Náuseas fortes e persistentes merecem atenção médica — podem indicar hiperêmese.</div>
+      <div class="note-item"><span class="note-num">3</span>O ganho de peso saudável varia entre 8 e 16 kg dependendo do IMC pré-gestacional.</div>
+      <div class="note-item"><span class="note-num">4</span>"Comer por dois" é mito — o aumento calórico necessário é de apenas ~300 kcal/dia.</div>
+    </div>
+  </main>
+  <div class="theme-toggle" id="ttAlim"><img id="tiAlim" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== EXERCÍCIOS ===================== -->
+<div id="screen-exercicios" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="exerciciosLogo" class="topbar-logo-sm" alt="logo"/>
+    <span class="topbar-title" data-goto="screen-home" style="cursor: pointer;">BabyCare Hub</span>
+    <nav class="topbar-nav">
+      <button class="topbar-btn" data-goto="screen-chat">Fale com a IA</button>
+      <button class="topbar-avatar" data-goto="screen-perfil"><img src="./assets/logo-circulo.png" id="exerciciosAvatar" class="topbar-avatar-img" alt="perfil"/></button>
+      <button class="topbar-btn topbar-btn--sair" data-sair="true">Sair</button>
+    </nav>
+  </header>
+  <div class="subnav">
+    <span class="subnav__item" data-goto="screen-home">Início</span><span class="subnav__sep">|</span>
+    <span class="subnav__item" data-goto="screen-perfil">Perfil</span><span class="subnav__sep">|</span>
+    <span class="subnav__item" data-goto="screen-ajuda">Ajuda</span>
+  </div>
+  <main class="page-main fade-in">
+    <div class="page-header">
+      <img id="exerciciosDecoL" class="page-deco" alt=""/><h2 class="page-title">Exercícios</h2><img id="exerciciosDecoR" class="page-deco" alt=""/>
+    </div>
+    <p class="page-week-label"><strong id="exerWeekLabel"> semana </strong></p>
+    <p class="page-subtitle page-subtitle--bold">Se exercitar corretamente pode ajudar muito durante a gestação</p>
+    <div class="three-col">
+      <div class="info-card">
+        <div class="info-card__header"><h3>Recomendações</h3></div>
+        <div class="info-card__body">
+          <div class="info-item"><strong>Caminhada</strong><span>30 min/dia, ritmo leve</span></div>
+          <div class="info-item"><strong>Natação</strong><span>Impacto zero nas articulações</span></div>
+          <div class="info-item"><strong>Yoga pré-natal</strong><span>Postura e respiração</span></div>
+          <div class="info-item"><strong>Pilates adaptado</strong><span>Fortalece assoalho pélvico</span></div>
+          <div class="info-item"><strong>Exercícios de Kegel</strong><span>Todos os trimestres</span></div>
+          <div class="info-item"><strong>Peso leve <em class="tag-tri">1º e 2º tri</em></strong><span>Movimentos controlados</span></div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__header"><h3>O que evitar</h3></div>
+        <div class="info-card__body">
+          <div class="info-item"><strong>Esportes de contato</strong><span>Risco de impacto abdominal</span></div>
+          <div class="info-item"><strong>Abdominais clássicos</strong><span>Pressão intra-abdominal</span></div>
+          <div class="info-item"><strong>Mergulho autônomo</strong><span>Risco de hipóxia fetal</span></div>
+          <div class="info-item"><strong>HIIT / alta intensidade</strong><span>Eleva temperatura corporal</span></div>
+          <div class="info-item"><strong>Ambiente quente</strong><span>Risco de hipertermia</span></div>
+          <div class="info-item"><strong>Deitar de costas <em class="tag-tri">2º+ tri</em></strong><span>Comprime veia cava</span></div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__header"><h3>Dicas Práticas</h3></div>
+        <div class="info-card__body">
+          <div class="info-item"><strong>Hidrate-se sempre</strong><span>Antes, durante e depois</span></div>
+          <div class="info-item"><strong>Teste da fala</strong><span>Consiga conversar ao exercitar</span></div>
+          <div class="info-item"><strong>Aquecimento obrigatório</strong><span>5–10 min antes de cada sessão</span></div>
+          <div class="info-item"><strong>Evite o calor do dia</strong><span>Prefira manhã cedo ou tarde</span></div>
+          <div class="info-item"><strong>Adapte por trimestre</strong><span>Reduza a intensidade no 3º</span></div>
+          <div class="info-item"><strong>Consulte o médico</strong><span>Antes de iniciar qualquer rotina</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="alert-bar">
+      <span class="alert-bar__icon">&#9888;</span>
+      Pare imediatamente se sentir dor, sangramento, tontura ou ausência de movimentos do bebê. Frequência cardíaca máxima segura: abaixo de 140 bpm.
+    </div>
+  </main>
+  <div class="theme-toggle" id="ttEx"><img id="tiEx" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== CHAT ===================== -->
+<div id="screen-chat" class="screen screen--chat">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="chatLogo" class="topbar-logo-sm" alt="logo"/>
+    <span class="topbar-title" data-goto="screen-home" style="cursor: pointer;">BabyCare Hub</span>
+    <nav class="topbar-nav" style="margin-left:auto">
+      <button class="topbar-btn" data-goto="screen-home">&#8592; Voltar</button>
+      <button class="topbar-btn topbar-btn--sair" data-sair="true">Sair</button>
+    </nav>
+    <div class="theme-toggle theme-toggle--inline" id="ttChat">
+      <img id="tiChat" class="theme-icon" alt="tema"/>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+    </div>
+  </header>
+  <div class="chat-body" id="chatMessages">
+    <div class="chat-msg chat-msg--bot">
+      <img src="./assets/chatbot-avatar.png" id="chatBotAvatar" class="chat-avatar" alt="Baby IA"/>
+      <div>
+        <p class="chat-sender">Baby IA</p>
+        <div class="chat-bubble chat-bubble--bot">
+          Olá! Sou a Baby IA, sua assistente de gestação. 🌸<br><br>
+          Nos diga como está se sentindo hoje ou tire alguma dúvida — estou aqui para te ajudar!
+        </div>
+      </div>
+    </div>
+    <p class="chat-suggestions-label">Sugestões de perguntas</p>
+    <div class="chat-chips" id="chatChips">
+      <button class="chip" id="chipSemana">Como estou na 18ª semana?</button>
+      <button class="chip">Tenho náuseas, é normal?</button>
+      <button class="chip">Quais exames devo fazer?</button>
+      <button class="chip">Posso me exercitar?</button>
+      <button class="chip">Estou com dores nas costas</button>
+    </div>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" type="text" placeholder="Digite aqui..." />
+    <button class="chat-send-btn" id="btnSendChat">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ===================== AJUDA ===================== -->
+<div id="screen-ajuda" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="ajudaLogo" class="topbar-logo-sm" alt="logo"/>
+    <span class="topbar-title" data-goto="screen-home" style="cursor: pointer;">BabyCare Hub</span>
+    <nav class="topbar-nav">
+      <span class="topbar-nav__item" data-goto="screen-home">Início</span>
+      <span class="topbar-nav__item" data-goto="screen-perfil">Perfil</span>
+      <span class="topbar-nav__item topbar-nav__item--active">Ajuda</span>
+      <button class="topbar-btn" data-goto="screen-chat">Fale com a IA</button>
+      <button class="topbar-avatar" data-goto="screen-perfil"><img src="./assets/logo-circulo.png" id="ajudaAvatar" class="topbar-avatar-img" alt="perfil"/></button>
+      <button class="topbar-btn topbar-btn--sair" data-sair="true">Sair</button>
+    </nav>
+  </header>
+
+  <main class="help-main fade-in">
+    <!-- Hero -->
+    <div class="help-hero">
+      <h2 class="help-hero__title">Como podemos te ajudar? 🌸</h2>
+      <p class="help-hero__sub">Encontre respostas rápidas ou fale com nossa assistente</p>
+    </div>
+
+    <!-- Categories -->
+    <p class="help-section-title">CATEGORIAS</p>
+    <div class="help-categories">
+      <div class="help-category-card" data-goto="screen-perfil">
+        <div class="help-category-icon">&#128100;</div>
+        <span class="help-category-label">Minha conta</span>
+      </div>
+      <div class="help-category-card" data-goto="screen-bebe">
+        <div class="help-category-icon">&#128336;</div>
+        <span class="help-category-label">Acompanhamento da gestação</span>
+      </div>
+      <div class="help-category-card" data-goto="screen-exercicios">
+        <div class="help-category-icon">&#127947;</div>
+        <span class="help-category-label">Exercícios e alimentação</span>
+      </div>
+      <div class="help-category-card" data-goto="screen-chat">
+        <div class="help-category-icon">&#128172;</div>
+        <span class="help-category-label">Fale com a Baby IA</span>
+      </div>
+      <div class="help-category-card" data-goto="screen-notif">
+        <div class="help-category-icon">&#128276;</div>
+        <span class="help-category-label">Notificações</span>
+      </div>
+      <div class="help-category-card" data-goto="screen-config">
+        <div class="help-category-icon">&#9881;</div>
+        <span class="help-category-label">Configurações</span>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <p class="help-section-title">PERGUNTAS FREQUENTES</p>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-item__header">
+          <span>A Baby IA substitui meu médico?</span>
+          <span class="faq-item__toggle">+</span>
+        </div>
+        <div class="faq-item__body">
+          Não. A Baby IA é uma assistente de apoio e informação, mas não substitui o acompanhamento do seu obstetra. Sempre consulte um profissional de saúde para decisões médicas.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__header">
+          <span>Como o BabyCare Hub calcula a minha Data Provável do Parto (DPP)?</span>
+          <span class="faq-item__toggle">+</span>
+        </div>
+        <div class="faq-item__body">
+          O cálculo é feito de forma automática com base na Data da sua Última Menstruação (DUM) que você informou no início. Somamos 280 dias (40 semanas) a essa data para estimar a semana exata em que o seu bebê deve nascer!
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__header">
+          <span>O que acontece com os dados físicos (peso, exames, diário) que eu registro aqui?</span>
+          <span class="faq-item__toggle">+</span>
+        </div>
+        <div class="faq-item__body">
+          Todos os seus dados de onboarding e registros são salvos de forma privada e segura na nuvem. Eles ficam vinculados exclusivamente à sua conta em tempo real, o que significa que você pode deslogar ou trocar de dispositivo sem medo de perder o seu histórico.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__header">
+          <span>O desenvolvimento do bebê muda a cada semana no aplicativo?</span>
+          <span class="faq-item__toggle">+</span>
+        </div>
+        <div class="faq-item__body">
+          Sim! Conforme as semanas avançam, a sua tela principal e a página do bebê são atualizadas automaticamente com o tamanho estimado do feto (comparado a alimentos), marcos de desenvolvimento e sugestões de atividades físicas ideais para o seu período gestacional.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__header">
+          <span>Esqueci minha senha ou quero alterá-la, o que devo fazer?</span>
+          <span class="faq-item__toggle">+</span>
+        </div>
+        <div class="faq-item__body">
+          Na tela de login, basta clicar em "Esqueceu a senha?". Insira o seu e-mail cadastrado e você receberá um link oficial em sua caixa de entrada para redefinir sua senha com total segurança em poucos segundos.
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact footer -->
+    <div class="faq-contact">
+      <p class="faq-contact__title">Não encontrou o que procurava?</p>
+      <p class="faq-contact__sub">Nossa equipe está pronta para te ajudar. Escolha como prefere entrar em contato.</p>
+      <div class="faq-contact__btns">
+        <button class="btn-faq-action" data-goto="screen-chat">Falar com Baby IA</button>
+        <button class="btn-faq-action" data-goto="screen-email">Enviar E-mail</button>
+      </div>
+    </div>
+  </main>
+  <div class="theme-toggle" id="ttAjuda"><img id="tiAjuda" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== ENVIAR E-MAIL ===================== -->
+<!-- ===================== E-MAIL PÚBLICO (sem login) ===================== -->
+<div id="screen-email-publico" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="emailPubLogo" class="topbar-logo-sm" alt="logo"/>
+    <span class="topbar-title">BabyCare Hub</span>
+    <nav class="topbar-nav" style="margin-left:auto">
+      <button class="topbar-btn" data-goto="screen-login">&#8592; Voltar ao login</button>
+    </nav>
+  </header>
+
+  <div class="email-page fade-in">
+    <h2 class="email-page__title">Precisa de ajuda?</h2>
+    <p class="email-page__sub">Preencha o formulário abaixo e nossa equipe responderá em até 48h.</p>
+
+    <div class="email-form-card">
+      <div class="email-field">
+        <label class="email-field-label">NOME</label>
+        <input class="email-field-input" id="pubEmailNome" type="text" placeholder="Seu nome completo" />
+      </div>
+      <div class="email-field">
+        <label class="email-field-label">E-MAIL PARA RESPOSTA</label>
+        <input class="email-field-input" id="pubEmailEmail" type="email" placeholder="seuemail@exemplo.com" />
+      </div>
+      <div class="email-field">
+        <label class="email-field-label">ASSUNTO</label>
+        <select class="email-field-select" id="pubEmailAssunto">
+          <option value="" disabled selected>Selecione o assunto</option>
+          <option>Problema com login ou cadastro</option>
+          <option>Dúvida sobre o aplicativo</option>
+          <option>Erro no aplicativo</option>
+          <option>Sugestão de melhoria</option>
+          <option>Outro</option>
+        </select>
+      </div>
+      <div class="email-field">
+        <label class="email-field-label">MENSAGEM</label>
+        <div class="email-textarea-wrap">
+          <textarea class="email-field-textarea" id="pubEmailMsg" placeholder="Descreva sua dúvida ou problema com detalhes..." maxlength="1100"></textarea>
+          <span class="email-char-count" id="pubEmailCharCount">0/1100 caracteres</span>
+        </div>
+      </div>
+      <div class="email-field">
+        <label class="email-field-label">ANEXAR ARQUIVO (opcional)</label>
+        <div class="email-attach-area" id="pubEmailAttach">
+          <div class="email-attach-icon">&#128206;</div>
+          <div>Toque para anexar um arquivo</div>
+          <div class="email-attach-hint">PNG, JPG ou PDF · Máx. 5MB</div>
+        </div>
+        <input type="file" id="pubEmailFileInput" accept=".png,.jpg,.jpeg,.pdf" style="display:none"/>
+      </div>
+      <div class="email-form-actions">
+        <button class="btn-email-cancel" data-goto="screen-login">Voltar ao login</button>
+        <button class="btn-email-send" id="btnPubEmailSend">Enviar E-mail</button>
+      </div>
+    </div>
+  </div>
+  <div class="theme-toggle" id="ttEmailPub"><img id="tiEmailPub" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== E-MAIL (logado) ===================== -->
+<div id="screen-email" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="emailLogo" class="topbar-logo-sm" alt="logo"/>
+    <span class="topbar-title" data-goto="screen-home" style="cursor: pointer;">BabyCare Hub</span>
+    <nav class="topbar-nav">
+      <span class="topbar-nav__item" data-goto="screen-home">Início</span>
+      <span class="topbar-nav__item" data-goto="screen-perfil">Perfil</span>
+      <span class="topbar-nav__item" data-goto="screen-ajuda">Ajuda</span>
+      <button class="topbar-btn" data-goto="screen-chat">Fale com a IA</button>
+      <button class="topbar-avatar" data-goto="screen-perfil"><img src="./assets/logo-circulo.png" id="emailAvatar" class="topbar-avatar-img" alt="perfil"/></button>
+      <button class="topbar-btn topbar-btn--sair" data-sair="true">Sair</button>
+    </nav>
+  </header>
+
+  <div class="email-page fade-in">
+    <h2 class="email-page__title">Enviar e-mail</h2>
+    <p class="email-page__sub">Preencha o formulário abaixo e nossa equipe responderá em até 48h.</p>
+
+    <div class="email-form-card">
+      <div class="email-field">
+        <label class="email-field-label">NOME</label>
+        <input class="email-field-input" type="text" placeholder="Seu nome completo" />
+      </div>
+      <div class="email-field">
+        <label class="email-field-label">E-MAIL PARA RESPOSTA</label>
+        <input class="email-field-input" type="email" placeholder="seuemail@exemplo.com" />
+      </div>
+      <div class="email-field">
+        <label class="email-field-label">ASSUNTO</label>
+        <select class="email-field-select">
+          <option value="" disabled selected>Selecione o assunto</option>
+          <option>Dúvida sobre gestação</option>
+          <option>Problema com a conta</option>
+          <option>Erro no aplicativo</option>
+          <option>Fale com a Baby IA</option>
+          <option>Sugestão de melhoria</option>
+          <option>Outro</option>
+        </select>
+      </div>
+      <div class="email-field">
+        <label class="email-field-label">MENSAGEM</label>
+        <div class="email-textarea-wrap">
+          <textarea class="email-field-textarea" id="emailMsg" placeholder="Descreva sua dúvida ou problema com detalhes..." maxlength="1100"></textarea>
+          <span class="email-char-count" id="emailCharCount">0/1100 caracteres</span>
+        </div>
+      </div>
+      <div class="email-field">
+        <label class="email-field-label">ANEXAR ARQUIVO (opcional)</label>
+        <div class="email-attach-area" id="emailAttach">
+          <div class="email-attach-icon">&#128206;</div>
+          <div>Toque para anexar um arquivo</div>
+          <div class="email-attach-hint">PNG, JPG ou PDF · Máx. 5MB</div>
+        </div>
+        <input type="file" id="emailFileInput" accept=".png,.jpg,.jpeg,.pdf" style="display:none"/>
+      </div>
+      <div class="email-form-actions">
+        <button class="btn-email-cancel" data-goto="screen-ajuda">Cancelar</button>
+        <button class="btn-email-send" id="btnEmailSend">Enviar E-mail</button>
+      </div>
+    </div>
+  </div>
+  <div class="theme-toggle" id="ttEmail"><img id="tiEmail" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== NOTIFICAÇÕES ===================== -->
+<div id="screen-notif" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="notifLogo" class="topbar-logo-sm" alt="logo"/>
+    <span class="topbar-title" data-goto="screen-home" style="cursor: pointer;">BabyCare Hub</span>
+    <nav class="topbar-nav">
+      <span class="topbar-nav__item" data-goto="screen-home">Início</span>
+      <span class="topbar-nav__item" data-goto="screen-perfil">Perfil</span>
+      <span class="topbar-nav__item" data-goto="screen-ajuda">Ajuda</span>
+      <button class="topbar-btn" data-goto="screen-chat">Fale com a IA</button>
+      <button class="topbar-avatar" data-goto="screen-perfil"><img src="./assets/logo-circulo.png" id="notifAvatar" class="topbar-avatar-img" alt="perfil"/></button>
+      <button class="topbar-btn topbar-btn--sair" data-sair="true">Sair</button>
+    </nav>
+  </header>
+  <main class="page-main fade-in">
+    <div class="page-header">
+      <h2 class="page-title">&#128276; Notificações</h2>
+    </div>
+    <p class="page-subtitle">Gerencie como e quando deseja receber alertas do BabyCare Hub.</p>
+    <div class="settings-card">
+      <div class="settings-section-title">Lembretes de saúde</div>
+      <div class="settings-row">
+        <div class="settings-row-info"><strong>Consulta pré-natal</strong><span>Lembrete antes das consultas agendadas</span></div>
+        <div class="settings-toggle-wrap"><div class="settings-toggle settings-toggle--on" data-stoggle="notif1"><div class="settings-toggle-dot"></div></div></div>
+      </div>
+      <div class="settings-row">
+        <div class="settings-row-info"><strong>Tomar suplementos</strong><span>Alerta diário no horário escolhido</span></div>
+        <div class="settings-toggle-wrap"><div class="settings-toggle settings-toggle--on" data-stoggle="notif2"><div class="settings-toggle-dot"></div></div></div>
+      </div>
+      <div class="settings-row">
+        <div class="settings-row-info"><strong>Movimento do bebê</strong><span>Lembrete para contar os chutes diariamente</span></div>
+        <div class="settings-toggle-wrap"><div class="settings-toggle" data-stoggle="notif3"><div class="settings-toggle-dot"></div></div></div>
+      </div>
+    </div>
+    <div class="settings-card">
+      <div class="settings-section-title">Atualizações do app</div>
+      <div class="settings-row">
+        <div class="settings-row-info"><strong>Dica semanal</strong><span>Novidades da semana de gestação atual</span></div>
+        <div class="settings-toggle-wrap"><div class="settings-toggle settings-toggle--on" data-stoggle="notif4"><div class="settings-toggle-dot"></div></div></div>
+      </div>
+      <div class="settings-row">
+        <div class="settings-row-info"><strong>Novidades do BabyCare</strong><span>Recursos e atualizações do aplicativo</span></div>
+        <div class="settings-toggle-wrap"><div class="settings-toggle" data-stoggle="notif5"><div class="settings-toggle-dot"></div></div></div>
+      </div>
+    </div>
+    <div class="settings-card">
+      <div class="settings-section-title">Canal de notificação</div>
+      <div class="settings-row settings-row--select">
+        <div class="settings-row-info"><strong>Horário dos lembretes</strong></div>
+        <select class="settings-select"><option>08:00</option><option>09:00</option><option>10:00</option><option selected>12:00</option><option>18:00</option><option>20:00</option></select>
+      </div>
+    </div>
+    <button class="btn-save" style="margin-top:16px;">Salvar preferências</button>
+  </main>
+  <div class="theme-toggle" id="ttNotif"><img id="tiNotif" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== CONFIGURAÇÕES ===================== -->
+<div id="screen-config" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="configLogo" class="topbar-logo-sm" alt="logo"/>
+    <div class="topbar-search-wrap"><input class="topbar-search" type="text" placeholder="&#128269;"/></div>
+    <nav class="topbar-nav">
+      <span class="topbar-nav__item" data-goto="screen-home">Início</span>
+      <span class="topbar-nav__item" data-goto="screen-perfil">Perfil</span>
+      <span class="topbar-nav__item" data-goto="screen-ajuda">Ajuda</span>
+      <button class="topbar-btn" data-goto="screen-chat">Fale com a IA</button>
+      <button class="topbar-avatar" data-goto="screen-perfil"><img src="./assets/logo-circulo.png" id="configAvatar" class="topbar-avatar-img" alt="perfil"/></button>
+      <button class="topbar-btn topbar-btn--sair" data-sair="true">Sair</button>
+    </nav>
+  </header>
+  <main class="page-main fade-in">
+    <div class="page-header">
+      <h2 class="page-title">&#9881; Configurações</h2>
+    </div>
+    <p class="page-subtitle">Personalize sua experiência no BabyCare Hub.</p>
+    <div class="settings-card">
+      <div class="settings-section-title">Aparência</div>
+      <div class="settings-row">
+        <div class="settings-row-info"><strong>Modo escuro</strong><span>Ativa o tema escuro em todas as telas</span></div>
+        <div class="settings-toggle-wrap"><div class="settings-toggle" id="configDarkToggle" data-stoggle="cfg-dark"><div class="settings-toggle-dot"></div></div></div>
+      </div>
+      <div class="settings-row settings-row--select">
+        <div class="settings-row-info"><strong>Idioma</strong></div>
+        <select class="settings-select"><option selected>Português (BR)</option><option>English</option><option>Español</option></select>
+      </div>
+    </div>
+    <div class="settings-card">
+      <div class="settings-section-title">Privacidade</div>
+      <div class="settings-row">
+        <div class="settings-row-info"><strong>Compartilhar dados anônimos</strong><span>Ajuda a melhorar o app</span></div>
+        <div class="settings-toggle-wrap"><div class="settings-toggle settings-toggle--on" data-stoggle="cfg-priv"><div class="settings-toggle-dot"></div></div></div>
+      </div>
+    </div>
+    <div class="settings-card">
+      <div class="settings-section-title">Conta</div>
+      <div class="settings-row settings-row--btn" data-goto="screen-recover">
+        <div class="settings-row-info"><strong>Alterar senha</strong><span>Redefina sua senha de acesso</span></div>
+        <span class="settings-row-arrow">&#8250;</span>
+      </div>
+      <div class="settings-row settings-row--btn" data-goto="screen-email">
+        <div class="settings-row-info"><strong>Excluir conta</strong><span>Solicitar exclusão permanente dos dados</span></div>
+        <span class="settings-row-arrow settings-row-arrow--danger">&#8250;</span>
+      </div>
+    </div>
+    <div class="settings-card">
+      <div class="settings-section-title">Sobre</div>
+      <div class="settings-row">
+        <div class="settings-row-info"><strong>Versão do app</strong><span>BabyCare Hub v1.0</span></div>
+      </div>
+      <div class="settings-row settings-row--btn" data-goto="screen-ajuda">
+        <div class="settings-row-info"><strong>Central de Ajuda</strong></div>
+        <span class="settings-row-arrow">&#8250;</span>
+      </div>
+    </div>
+  </main>
+  <div class="theme-toggle" id="ttConfig"><img id="tiConfig" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+
+<!-- ===================== PERFIL ===================== -->
+<div id="screen-perfil" class="screen">
+  <header class="topbar">
+    <img src="./assets/logo-white.png" id="perfilLogo" class="topbar-logo-sm" alt="logo"/>
+    <nav class="topbar-nav">
+      <span class="topbar-nav__item topbar-nav__item--active">Perfil</span>
+      <span class="topbar-nav__item" data-goto="screen-home">Início</span>
+      <span class="topbar-nav__item" data-goto="screen-ajuda">Ajuda</span>
+      <button class="topbar-btn topbar-btn--sair" data-sair="true">Sair</button>
+    </nav>
+  </header>
+  <div class="perfil-subheader">
+    <strong id="perfilName">Usuária</strong>
+    <span class="perfil-sep">|</span>
+    <span id="perfilAge">—</span>
+    <span class="perfil-sep">|</span>
+    <span id="perfilWeek">— Semana</span>
+  </div>
+  <main class="perfil-main fade-in">
+    <div class="perfil-layout">
+      <div class="perfil-photo-col">
+        <div class="perfil-avatar-wrap">
+          <img src="./assets/perfil-avatar.png" id="perfilAvatarImg" class="perfil-avatar-img" alt="avatar"/>
+        </div>
+        
+        <button class="btn-change-photo" id="btnChangePhoto">Mudar Foto</button>
+        
+        <input type="file" id="filePhotoPicker" accept="image/*" style="display: none;" />
+      </div>
+      <div class="perfil-data-col">
+        <div class="perfil-row"><span class="perfil-label">Altura:</span><span class="perfil-value" id="pdAltura">—</span></div>
+        <div class="perfil-row"><span class="perfil-label">Peso:</span><span class="perfil-value" id="pdPeso">—</span></div>
+        <div class="perfil-row"><span class="perfil-label">Tipo sanguíneo:</span><span class="perfil-value" id="pdSang">—</span></div>
+        <div class="perfil-row"><span class="perfil-label">Tipo de gestação:</span><span class="perfil-value" id="pdTipoGest">—</span></div>
+        <div class="perfil-row"><span class="perfil-label">Prática de ativ. física:</span><span class="perfil-value" id="pdAtiv">—</span></div>
+        <button class="btn-edit" data-goto="screen-onboard">Editar</button>
+      </div>
+      <div class="perfil-illus-col">
+        <img src="./assets/gravida-perfil.png" id="perfilIllus" class="perfil-illus-img" alt="gestante"/>
+      </div>
+    </div>
+  </main>
+  <div class="theme-toggle" id="ttPerfil"><img id="tiPerfil" class="theme-icon" alt="tema"/><div class="toggle-track"><div class="toggle-thumb"></div></div></div>
+</div>
+</body>
+</html>
