@@ -129,6 +129,15 @@ DIRETRIZES DE ESTILO E CHAT:
 // Endpoint simples só para testar se a API está no ar
 app.MapGet("/", () => "BabyCare Hub API está rodando! 🚀");
 
+// Em produção (Render, Railway, etc.), a plataforma define a porta
+// através da variável de ambiente PORT. Localmente, isso não existe,
+// então o app continua usando a porta padrão do launchSettings.json.
+var port = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(port))
+{
+    app.Urls.Add($"http://0.0.0.0:{port}");
+}
+
 app.Run();
 
 // Modelo do que o frontend envia para nós.
