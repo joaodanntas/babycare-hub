@@ -882,7 +882,7 @@ function removeTypingIndicator() {
   if (el) el.remove();
 }
 
-const API_BASE_URL = "http://localhost:55865"; // depois: "https://sua-api.onrender.com"
+const API_BASE_URL = "https://babycare-api-99fh.onrender.com";
 
 
 // 5. Motor principal que envia os dados para o Gemini
