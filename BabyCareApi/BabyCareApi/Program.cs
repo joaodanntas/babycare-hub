@@ -4,12 +4,11 @@ using System.Text.Json;
 var builder = WebApplication.CreateBuilder(args);
 
 // CORS: permite que o frontend (em outro domínio/porta) chame esta API.
-// Em produção, troque "AllowAnyOrigin" pelo domínio real do seu site.
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("FrontendPolicy", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("https://joaodanntas.github.io")
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
@@ -43,8 +42,6 @@ app.MapPost("/api/chat", async (ChatRequest request) =>
 
     var semanas = request.SemanasGestacao.HasValue ? request.SemanasGestacao.Value.ToString() : "não informada";
 
-    // O mesmo prompt de personalidade que você já tinha no frontend,
-    // só que agora ele roda no servidor.
     var systemPrompt = $@"Você é a Baby IA, assistente virtual especialista em gestação, saúde materna e desenvolvimento fetal do BabyCare Hub. A usuária está na semana {semanas} de gestação.
  
     PERSONALIDADE E TOM:
